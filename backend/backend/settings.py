@@ -17,6 +17,11 @@ import os
 
 load_dotenv()
 
+LINE_CHANNEL_ID = os.getenv('APP_LINE_CHANNEL_ID')
+LINE_CHANNEL_SECRET = os.getenv('APP_LINE_CHANNEL_SECRET')
+LINE_REDIRECT_URI = os.getenv('APP_LINE_REDIRECT_URI')
+FRONTEND_URL = os.getenv('FRONTEND_URL')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -94,7 +99,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-# 啟動前置https://console.choreo.dev/organizations/ntut/dependencies/databases開啟資料庫
+# 啟動前置https://console.choreo.dev/organizations/ntut/dependencies/databases 開啟資料庫
 
 DATABASES = {
     'default': {
