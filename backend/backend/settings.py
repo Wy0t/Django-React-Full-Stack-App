@@ -94,6 +94,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# 啟動前置https://console.choreo.dev/organizations/ntut/dependencies/databases開啟資料庫
 
 DATABASES = {
     'default': {
