@@ -10,6 +10,8 @@ from jose import jwt
 from urllib.parse import urlencode
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
 
 
 class NoteListCreate(generics.ListCreateAPIView):
@@ -40,6 +42,12 @@ class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_current_user(request):
+    user = request.user
+    return Response({'username': user.username})    
 
 def line_login(request):
     line_auth_url = "https://access.line.me/oauth2/v2.1/authorize"

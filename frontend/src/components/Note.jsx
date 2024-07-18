@@ -6,9 +6,10 @@ function Note({note, onDelete}) {
 
     return (
         <div className="note-container">
-            <p className="note-title">{note.title}</p>
-            <p className="note-content">{note.content}</p>
-            <p className="note-date">{formattedDate}</p>
+            <p className="note-title">Title：{note.title}</p>
+            <p className="note-content">Content：<br/><br/>{note.content}</p>
+            <p className="note-date">Note-Date：{formattedDate}</p>
+            <p className="note-author">Author：{note.author_username}</p>
             <button className="delete-button" onClick={() => onDelete(note.id)}>
                 Delete
             </button>

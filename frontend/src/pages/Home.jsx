@@ -9,9 +9,12 @@ function Home() {
     const [notes, setNotes] = useState([]);
     const [content, setContent] = useState("")
     const [title, setTitle] = useState("")
+    const [state, setState] = useState(true)
+    const [currentUser, setCurrentUser] = useState(null)
 
     useEffect(() => {
         getNotes();
+        getCurrentUser();
     }, []);
 
     const getNotes = async () => {
@@ -19,6 +22,14 @@ function Home() {
             .get("/api/notes/")
             .then((res) => res.data)
             .then((data) => {setNotes(data); console.log(data) })
+            .catch((err) => alert(err));
+    };
+
+    const getCurrentUser = async () => {
+        api
+            .get("/api/current_user/")
+            .then((res) => res.data)
+            .then((data) => { setCurrentUser(data.username); console.log("Current User:", data.username); })
             .catch((err) => alert(err));
     };
 
@@ -36,7 +47,7 @@ function Home() {
     const createNote = (e) => {
         e.preventDefault()
         api
-            .post("/api/notes/", {content, title})
+            .post("/api/notes/", {content, title, state})
             .then((res) => {
                 if (res.status === 201) alert("Note created!");
                 else alert("Failed to make note")
@@ -50,7 +61,7 @@ function Home() {
         <div>
             <h2>Notes</h2>
             {notes.map((note) => (
-                <Note note={note} onDelete={deleteNote} key={note.id} />
+                (note.state || note.author_username === currentUser) ? <Note note={note} onDelete={deleteNote} key={note.id} /> : null
             ))}
         </div>
         <h2>Create a Note</h2>
@@ -75,6 +86,18 @@ function Home() {
             onChange={(e) => setContent(e.target.value)}
             ></textarea>
             <br/>
+            <label htmlFor='state'>State:</label>
+                <select
+                    id='state'
+                    name='state'
+                    required
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                >
+                    <option value='true'>Public</option>
+                    <option value='false'>Private</option>
+                </select>
+                <br/>
             <input type='submit' value='Submit'></input>
             <LogoutButton />
         </form>
