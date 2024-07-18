@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import api from '../api'
 import Note from '../components/Note'
+import LogoutButton from '../components/LogoutButton'
 import '../styles/Home.css'
+
 
 function Home() {
     const [notes, setNotes] = useState([]);
@@ -74,6 +76,7 @@ function Home() {
             ></textarea>
             <br/>
             <input type='submit' value='Submit'></input>
+            <LogoutButton />
         </form>
     </div>
 }

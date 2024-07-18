@@ -89,7 +89,7 @@ def line_callback(request):
     refresh_token = str(refresh)
 
     # 重定向到前端並攜帶 token
-    frontend_url = "http://localhost:5174/line/callback"
+    frontend_url = "http://localhost:5173/line/callback"
     params = urlencode({
         'access_token': access_token,
         'refresh_token': refresh_token

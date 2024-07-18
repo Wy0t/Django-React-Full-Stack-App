@@ -11,11 +11,14 @@ const LineCallback = () => {
         const accessToken = params.get('access_token');
         const refreshToken = params.get('refresh_token');
 
+        console.log('Access Token:', accessToken);
+        console.log('Refresh Token:', refreshToken);
+
         if (accessToken && refreshToken) {
             // 保存 token 到 local storage 或應用程序狀態
             localStorage.setItem('access', accessToken);
             localStorage.setItem('refresh', refreshToken);
-            window.location.href = 'http://localhost:5174/';
+            window.location.href = 'http://localhost:5173/';
         }
     }, [location, navigate]);
 
